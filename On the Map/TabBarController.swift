@@ -10,8 +10,8 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    override func viewDidLoad() {
-        navigationController?.navigationBar.items = [UINavigationItem(title: "On the Map")]
-    }
-
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
+    
+    @IBOutlet weak var pinButton: UIBarButtonItem!
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
 }

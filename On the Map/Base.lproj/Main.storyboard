@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -96,17 +97,26 @@
             </objects>
             <point key="canvasLocation" x="497" y="416"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--On the Map-->
         <scene sceneID="4Uz-pn-ASP">
             <objects>
                 <tabBarController id="5jI-A9-Mqd" customClass="TabBarController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="yqI-gC-75X"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="yqI-gC-75X">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="EpL-5I-Hzf"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="HQZ-MB-QWC"/>
+                            <barButtonItem image="Pin" id="sjc-0F-gG3"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="E09-7I-51b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="logoutButton" destination="EpL-5I-Hzf" id="0LT-TM-L48"/>
+                        <outlet property="pinButton" destination="sjc-0F-gG3" id="Dj8-9i-sm2"/>
+                        <outlet property="refreshButton" destination="HQZ-MB-QWC" id="x1Q-7z-AzN"/>
                         <segue destination="ThS-cf-P9C" kind="relationship" relationship="viewControllers" id="DET-G3-7fW"/>
                         <segue destination="aUo-bF-Lrj" kind="relationship" relationship="viewControllers" id="SeW-Jm-vo5"/>
                     </connections>
@@ -182,5 +192,6 @@
     </scenes>
     <resources>
         <image name="Logo" width="420" height="420"/>
+        <image name="Pin" width="32" height="32"/>
     </resources>
 </document>
