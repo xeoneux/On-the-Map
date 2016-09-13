@@ -12,6 +12,9 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var submitButton: UIButton!
 
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
