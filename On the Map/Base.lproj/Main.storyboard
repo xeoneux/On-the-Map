@@ -99,7 +99,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="4Uz-pn-ASP">
             <objects>
-                <tabBarController id="5jI-A9-Mqd" sceneMemberID="viewController">
+                <tabBarController id="5jI-A9-Mqd" customClass="TabBarController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="yqI-gC-75X"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="E09-7I-51b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
