@@ -9,7 +9,7 @@
 import Foundation
 
 enum Domain: String {
-    case Parse = "https://parse.udacity.com/parse/"
+    case Parse = "https://parse.udacity.com/parse/classes/StudentLocation"
     case Udacity = "https://www.udacity.com/api/"
 }
 
@@ -77,6 +77,20 @@ class API {
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
         request.HTTPMethod = "POST"
+        Header(request, domain: domain)
+
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)
+
+        Task(request, handler: handler)
+    }
+
+    static func put(domain: Domain, objectId: String, body: String, handler: (result: AnyObject!, error: NSError?) -> Void) {
+
+        let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue + objectId)!)
+
+        request.HTTPMethod = "PUT"
         Header(request, domain: domain)
 
         request.addValue("application/json", forHTTPHeaderField: "Accept")
