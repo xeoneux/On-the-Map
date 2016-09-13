@@ -11,7 +11,11 @@ import UIKit
 class TabBarController: UITabBarController {
 
     @IBOutlet weak var logoutButton: UIBarButtonItem!
-    
+
     @IBOutlet weak var pinButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
+
+    @IBAction func logout(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
