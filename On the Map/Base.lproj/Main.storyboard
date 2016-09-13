@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -25,9 +26,15 @@
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="290"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="6nM-R8-kCc">
-                                                <rect key="frame" x="70" y="0.0" width="420" height="290"/>
+                                                <rect key="frame" x="135" y="0.0" width="290" height="290"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="6nM-R8-kCc" secondAttribute="height" multiplier="1:1" id="fVx-T0-h7V"/>
+                                                </constraints>
                                             </imageView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="6nM-R8-kCc" firstAttribute="height" secondItem="TWj-xH-x7Z" secondAttribute="height" id="beq-WB-jV3"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5JK-OI-sYE">
                                         <rect key="frame" x="0.0" y="290" width="560" height="290"/>
