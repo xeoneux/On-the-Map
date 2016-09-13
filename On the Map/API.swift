@@ -73,4 +73,26 @@ class API {
 
         Task(request, handler: handler)
     }
+
+    static func delete(domain: Domain, body: String, handler: (result: AnyObject!, error: NSError?) -> Void) {
+
+        let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
+
+        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+
+        let xsrfCookie = cookieStorage.cookies?.filter {
+            $0.name == "XSRF-TOKEN"
+        }.first
+
+        guard xsrfCookie != nil else {
+            handler(result: nil, error: Error("No cookie found", domain: "API"))
+            return
+        }
+
+        request.setValue(xsrfCookie?.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+
+        request.HTTPMethod = "DELETE"
+
+        Task(request, handler: handler)
+    }
 }
