@@ -15,6 +15,14 @@ class TabBarController: UITabBarController {
     @IBOutlet weak var pinButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
 
+    override func viewDidLoad() {
+        API.get(.Parse, handler: {
+            if $0.result != nil {
+                print($0.result)
+            }
+        })
+    }
+
     @IBAction func logout(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
