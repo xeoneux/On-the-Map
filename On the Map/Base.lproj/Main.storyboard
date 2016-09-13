@@ -43,17 +43,20 @@
                                                 <rect key="frame" x="160" y="0.0" width="240" height="145"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GhD-mL-zIU">
-                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="48"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="36"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vfD-Bj-xxt">
-                                                        <rect key="frame" x="0.0" y="48" width="240" height="49"/>
+                                                        <rect key="frame" x="0.0" y="36" width="240" height="37"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbV-GW-2eK">
+                                                        <rect key="frame" x="0.0" y="73" width="240" height="36"/>
+                                                    </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8B-0v-pzo">
-                                                        <rect key="frame" x="0.0" y="97" width="240" height="48"/>
+                                                        <rect key="frame" x="0.0" y="109" width="240" height="36"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="240" id="5rf-kM-uqQ"/>
                                                         </constraints>
@@ -83,6 +86,9 @@
                             <constraint firstAttribute="leadingMargin" secondItem="oMp-3g-Sqx" secondAttribute="leading" id="v9r-VL-YSS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="submitButton" destination="Y8B-0v-pzo" id="Co7-dU-fhW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,9 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var submitButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        submitButton.layer.cornerRadius = 5.0
+        submitButton.backgroundColor = UIColor(red: 2/255, green: 179/255, blue: 228/255, alpha: 1)
     }
 
     override func didReceiveMemoryWarning() {
