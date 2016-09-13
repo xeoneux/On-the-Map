@@ -56,13 +56,13 @@
 		84D2F7521D8657F600032DFA /* On the Map */ = {
 			isa = PBXGroup;
 			children = (
+				845E7B301D86C4EF007F2AF5 /* API.swift */,
 				84D2F7531D8657F600032DFA /* AppDelegate.swift */,
 				84D2F7551D8657F600032DFA /* LoginViewController.swift */,
 				84D2F7571D8657F600032DFA /* Main.storyboard */,
 				84D2F75A1D8657F600032DFA /* Assets.xcassets */,
 				84D2F75C1D8657F600032DFA /* LaunchScreen.storyboard */,
 				84D2F75F1D8657F600032DFA /* Info.plist */,
-				845E7B301D86C4EF007F2AF5 /* API.swift */,
 			);
 			path = "On the Map";
 			sourceTree = "<group>";
