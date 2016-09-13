@@ -18,6 +18,16 @@ func Error(error: String, domain: String) -> NSError {
     return NSError(domain: domain, code: 0, userInfo: userInfo)
 }
 
+func Header(request: NSMutableURLRequest, domain: Domain) {
+    switch domain {
+    case .Parse:
+        request.addValue(Constants.Parse.ApplicationId, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(Constants.Parse.restApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+    case .Udacity:
+        break
+    }
+}
+
 func Task(request: NSMutableURLRequest, handler: (result: AnyObject!, error: NSError?) -> Void) {
     let session = NSURLSession.sharedSession()
     let task = session.dataTaskWithRequest(request) { (data, response, error) in
@@ -57,6 +67,7 @@ class API {
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
         request.HTTPMethod = "GET"
+        Header(request, domain: domain)
 
         Task(request, handler: handler)
     }
@@ -66,6 +77,7 @@ class API {
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
         request.HTTPMethod = "POST"
+        Header(request, domain: domain)
 
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -92,6 +104,7 @@ class API {
         request.setValue(xsrfCookie?.value, forHTTPHeaderField: "X-XSRF-TOKEN")
 
         request.HTTPMethod = "DELETE"
+        Header(request, domain: domain)
 
         Task(request, handler: handler)
     }
