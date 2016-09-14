@@ -28,7 +28,7 @@ func Header(request: NSMutableURLRequest, domain: Domain) {
     }
 }
 
-func Task(request: NSMutableURLRequest, handler: (result: AnyObject!, error: NSError?) -> Void) {
+func Task(request: NSMutableURLRequest, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
     let session = NSURLSession.sharedSession()
     let task = session.dataTaskWithRequest(request) { (data, response, error) in
 
@@ -62,7 +62,7 @@ func Task(request: NSMutableURLRequest, handler: (result: AnyObject!, error: NSE
 
 class API {
 
-    static func get(domain: Domain, handler: (result: AnyObject!, error: NSError?) -> Void) {
+    static func get(domain: Domain, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
@@ -72,7 +72,7 @@ class API {
         Task(request, handler: handler)
     }
 
-    static func post(domain: Domain, body: String, handler: (result: AnyObject!, error: NSError?) -> Void) {
+    static func post(domain: Domain, body: String, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
@@ -86,7 +86,7 @@ class API {
         Task(request, handler: handler)
     }
 
-    static func put(domain: Domain, objectId: String, body: String, handler: (result: AnyObject!, error: NSError?) -> Void) {
+    static func put(domain: Domain, objectId: String, body: String, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue + objectId)!)
 
@@ -100,7 +100,7 @@ class API {
         Task(request, handler: handler)
     }
 
-    static func delete(domain: Domain, body: String, handler: (result: AnyObject!, error: NSError?) -> Void) {
+    static func delete(domain: Domain, body: String, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 

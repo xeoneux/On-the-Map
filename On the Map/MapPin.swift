@@ -17,7 +17,7 @@ struct MapPin {
     let longitude: Float
 
     let mapString: String
-    let mapUrl: String
+    let mediaUrl: String
 
     let objectId: String
     let uniqueKey: Int
