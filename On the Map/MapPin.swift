@@ -20,6 +20,6 @@ struct MapPin {
     let mediaUrl: String
 
     let objectId: String
-    let uniqueKey: Int
+    let uniqueKey: String
 
 }

@@ -18,7 +18,8 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         API.get(.Parse, handler: {
             if $0.result != nil {
-                print($0.result)
+                print($0.result!)
+                print(try! Parser.parseMapPins($0.result!)?.count)
             }
         })
     }

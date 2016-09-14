@@ -9,11 +9,11 @@
 import Foundation
 
 class Parser {
-    static func parseMapPins(json: [String: AnyObject]) -> [MapPin]? {
+    static func parseMapPins(json: [String: AnyObject]) throws -> [MapPin]? {
 
         guard let pins = json["results"] as? [[String: AnyObject]] else {
-            Error("Parse error: results", domain: "JSON")
-            return nil
+            print("results")
+            throw Error("Parse error: results", domain: "JSON")
         }
 
         var mapPins = [MapPin]()
@@ -21,42 +21,34 @@ class Parser {
         for pin in pins {
 
             guard let firstName = pin["firstName"] as? String else {
-                Error("Parse error: firstName", domain: "JSON")
-                break
+                throw Error("Parse error: firstName", domain: "JSON")
             }
             guard let lastName = pin["lastName"] as? String else {
-                Error("Parse error: lastName", domain: "JSON")
-                break
+                throw Error("Parse error: lastName", domain: "JSON")
             }
 
 
             guard let latitude = pin["latitude"] as? Float else {
-                Error("Parse error: latitude", domain: "JSON")
-                break
+                throw Error("Parse error: latitude", domain: "JSON")
             }
             guard let longitude = pin["longitude"] as? Float else {
-                Error("Parse error: longitude", domain: "JSON")
-                break
+                throw Error("Parse error: longitude", domain: "JSON")
             }
 
 
             guard let mapString = pin["mapString"] as? String else {
-                Error("Parse error: mapString", domain: "JSON")
-                break
+                throw Error("Parse error: mapString", domain: "JSON")
             }
             guard let mediaURL = pin["mediaURL"] as? String else {
-                Error("Parse error: mediaURL", domain: "JSON")
-                break
+                throw Error("Parse error: mediaURL", domain: "JSON")
             }
 
 
             guard let objectId = pin["objectId"] as? String else {
-                Error("Parse error: objectId", domain: "JSON")
-                break
+                throw Error("Parse error: objectId", domain: "JSON")
             }
-            guard let uniqueKey = pin["uniqueKey"] as? Int else {
-                Error("Parse error: uniqueKey", domain: "JSON")
-                break
+            guard let uniqueKey = pin["uniqueKey"] as? String else {
+                throw Error("Parse error: uniqueKey", domain: "JSON")
             }
 
             let mapPin = MapPin(firstName: firstName, lastName: lastName, latitude: latitude, longitude: longitude, mapString: mapString, mediaUrl: mediaURL, objectId: objectId, uniqueKey: uniqueKey)
