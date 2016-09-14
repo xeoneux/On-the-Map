@@ -14,6 +14,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad() {
+
+        mapView.removeAnnotations(mapView.annotations)
+
         let annotations: [MKPointAnnotation] = MapPin.getPins().map {
             let latitude = CLLocationDegrees($0.latitude)
             let longitude = CLLocationDegrees($0.longitude)
@@ -32,5 +35,31 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
 
         mapView.addAnnotations(annotations)
+    }
+
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier("Pin") as? MKPinAnnotationView
+
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
+            pinView?.canShowCallout = true
+            pinView?.pinTintColor = UIColor.redColor()
+            pinView?.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+        } else {
+            pinView?.annotation = annotation
+        }
+
+        return pinView
+    }
+
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.sharedApplication()
+            if let string = view.annotation?.subtitle! {
+                app.openURL(NSURL(string: string)!)
+            }
+        }
     }
 }
