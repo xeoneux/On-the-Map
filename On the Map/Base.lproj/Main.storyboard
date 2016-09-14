@@ -156,7 +156,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="WZK-08-V3k" secondAttribute="trailing" constant="-20" id="d4a-ZX-eln"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="eY4-bQ-TLq"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="Map" id="eY4-bQ-TLq"/>
                     <connections>
                         <outlet property="mapView" destination="WZK-08-V3k" id="yJs-Be-G8A"/>
                     </connections>
@@ -197,7 +197,7 @@
                             <outlet property="delegate" destination="aUo-bF-Lrj" id="82q-Za-7JJ"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="List" id="eo1-ez-0So"/>
+                    <tabBarItem key="tabBarItem" title="List" image="List" id="eo1-ez-0So"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPS-VD-9Ym" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -221,7 +221,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="List" width="32" height="32"/>
         <image name="Logo" width="420" height="420"/>
+        <image name="Map" width="32" height="32"/>
         <image name="Pin" width="32" height="32"/>
     </resources>
 </document>
