@@ -16,7 +16,7 @@ class TabBarController: UITabBarController {
     @IBOutlet weak var refreshButton: UIBarButtonItem!
 
     override func viewDidLoad() {
-        fetch()
+        MapPin.downloadPins()
     }
 
     @IBAction func logout(sender: AnyObject) {
@@ -24,12 +24,7 @@ class TabBarController: UITabBarController {
     }
 
     @IBAction func refresh(sender: AnyObject) {
-        fetch()
-    }
-
-    func fetch() {
         MapPin.downloadPins()
-        NSNotificationCenter.defaultCenter().postNotificationName("ReloadData", object: nil)
     }
 
 }
