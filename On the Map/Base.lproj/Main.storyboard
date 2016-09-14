@@ -111,7 +111,11 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="HQZ-MB-QWC"/>
+                            <barButtonItem systemItem="refresh" id="HQZ-MB-QWC">
+                                <connections>
+                                    <action selector="refresh:" destination="5jI-A9-Mqd" id="Q23-6X-HFU"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="Pin" id="sjc-0F-gG3"/>
                         </rightBarButtonItems>
                     </navigationItem>
