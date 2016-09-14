@@ -49,16 +49,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
 
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier("Pin") as? MKPinAnnotationView
+        let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
 
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
-            pinView?.canShowCallout = true
-            pinView?.pinTintColor = UIColor.redColor()
-            pinView?.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-        } else {
-            pinView?.annotation = annotation
-        }
+        pinView.canShowCallout = true
+        pinView.pinTintColor = UIColor.redColor()
+        pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
 
         return pinView
     }
