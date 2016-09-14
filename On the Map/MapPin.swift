@@ -6,7 +6,7 @@
 //  Copyright © 2016 Aayush Kapoor. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct MapPin {
 
@@ -22,4 +22,21 @@ struct MapPin {
     let objectId: String
     let uniqueKey: String
 
+    static func getPins() -> [MapPin] {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return appDelegate.mapPins
+    }
+
+    static func setPins(mapPins: [MapPin]) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.mapPins = mapPins
+    }
+
+    static func downloadPins() {
+        API.get(.Parse, handler: {
+            if $0.result != nil {
+                setPins(try! Parser.parseMapPins($0.result!)!)
+            }
+        })
+    }
 }
