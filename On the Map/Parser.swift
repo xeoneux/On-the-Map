@@ -49,13 +49,13 @@ class Parser {
             if let _latitude = pin["latitude"] as? Float {
                 latitude = _latitude
             } else {
-                throw Error("Parse error: latitude", domain: "JSON")
+                latitude = 0
             }
 
             if let _longitude = pin["longitude"] as? Float {
                 longitude = _longitude
             } else {
-                throw Error("Parse error: longitude", domain: "JSON")
+                longitude = 0
             }
 
 
@@ -75,13 +75,13 @@ class Parser {
             if let _objectId = pin["objectId"] as? String {
                 objectId = _objectId
             } else {
-                throw Error("Parse error: objectId", domain: "JSON")
+                objectId = ""
             }
 
             if let _uniqueKey = pin["uniqueKey"] as? String {
                 uniqueKey = _uniqueKey
             } else {
-                throw Error("Parse error: mediaUrl", domain: "JSON")
+                uniqueKey = ""
             }
 
 

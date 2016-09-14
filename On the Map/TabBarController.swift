@@ -16,12 +16,22 @@ class TabBarController: UITabBarController {
     @IBOutlet weak var refreshButton: UIBarButtonItem!
 
     override func viewDidLoad() {
+        savePins(getPins())
+    }
+
+    func getPins() -> [MapPin] {
+        var pins = [MapPin]()
         API.get(.Parse, handler: {
             if $0.result != nil {
-                print($0.result!)
-                print(try! Parser.parseMapPins($0.result!)?.count)
+                pins = try! Parser.parseMapPins($0.result!)!
             }
         })
+        return pins
+    }
+
+    func savePins(mapPins: [MapPin]) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.mapPins = mapPins
     }
 
     @IBAction func logout(sender: AnyObject) {
