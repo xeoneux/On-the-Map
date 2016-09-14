@@ -17,6 +17,7 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         MapPin.downloadPins()
+        NSNotificationCenter.defaultCenter().postNotificationName("ReloadData", object: nil)
     }
 
     @IBAction func logout(sender: AnyObject) {

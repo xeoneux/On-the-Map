@@ -9,6 +9,23 @@
 import UIKit
 
 class ListViewController: UITableViewController {
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.viewDidLoad), name:"ReloadData", object: nil)
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReloadData", object: nil)
+    }
+
+    override func viewDidLoad() {
+        tableView.reloadData()
+    }
+}
+
+extension ListViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MapPin.getPins().count
     }
