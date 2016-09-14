@@ -13,6 +13,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.viewDidLoad), name:"ReloadData", object: nil)
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReloadData", object: nil)
+    }
+
     override func viewDidLoad() {
 
         mapView.removeAnnotations(mapView.annotations)
