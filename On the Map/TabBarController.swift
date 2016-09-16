@@ -21,6 +21,12 @@ class TabBarController: UITabBarController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadDataError), name:"ReloadDataError", object: nil)
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReloadDataError", object: nil)
+    }
+
     override func viewDidLoad() {
         MapPin.downloadPins()
 
