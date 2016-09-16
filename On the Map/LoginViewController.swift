@@ -33,8 +33,24 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func login(sender: AnyObject) {
-        let navigationController = storyboard?.instantiateViewControllerWithIdentifier("Navigation Controller")
-        presentViewController(navigationController!, animated: true, completion: nil)
+        if emailField.text?.characters.count != 0 && passwordField.text?.characters.count != 0 {
+            let email = emailField.text
+            let password = passwordField.text
+            let credentials = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
+
+            API.post(.Udacity, body: credentials, handler: {
+                if let result = $0.result {
+                    print(result)
+
+                    dispatch_async(dispatch_get_main_queue(), {
+                        let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("Navigation Controller")
+                        self.presentViewController(navigationController!, animated: true, completion: nil)
+                    })
+                } else {
+                    print($0.error)
+                }
+            })
+        }
     }
 
 }
