@@ -109,7 +109,12 @@ class LocationViewController: UIViewController {
                         MapPin.downloadPins()
                     })
                 } else {
-                    print($0.error!)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        let alertController = UIAlertController(title: "Post Error", message: "Could not post the location", preferredStyle: .Alert)
+                        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alertController.addAction(action)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    })
                 }
             })
         }
