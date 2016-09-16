@@ -52,14 +52,24 @@ class LocationViewController: UIViewController {
 
             // Search for location
             let request = MKLocalSearchRequest()
+            request.region = mapView.region
             request.naturalLanguageQuery = searchText
+
             let search = MKLocalSearch(request: request)
             search.startWithCompletionHandler {
                 guard let response = $0.0 else {
                     return
                 }
 
-                mapView.centerCoordinate = (response.mapItems.first?.placemark.coordinate)!
+                let coordinate = response.mapItems.first?.placemark.coordinate
+
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = coordinate!
+                mapView.addAnnotation(annotation)
+
+                let viewRegion = MKCoordinateRegionMakeWithDistance(coordinate!, 5000, 5000)
+                let adjustedRedion = mapView.regionThatFits(viewRegion)
+                mapView.setRegion(adjustedRedion, animated: true)
             }
         }
     }
