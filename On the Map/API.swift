@@ -122,13 +122,4 @@ class API {
 
         Task(request, handler: handler)
     }
-
-    static func bodyMaker(domain: Domain, email: String, password: String) -> String {
-        switch domain {
-        case .Parse:
-            return ""
-        case .Udacity:
-            return "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
-        }
-    }
 }
