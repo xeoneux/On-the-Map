@@ -32,6 +32,10 @@ class LocationViewController: UIViewController {
         submitButton.addTarget(self, action: #selector(submit), forControlEvents: .TouchUpInside)
     }
 
+    @IBAction func cancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func findOnTheMap(sender: AnyObject) {
         if textField.text?.characters.count != 0 {
 
@@ -83,7 +87,7 @@ class LocationViewController: UIViewController {
                 } else {
                     let alertController = UIAlertController(title: "Location Error", message: "No such location found", preferredStyle: .Alert)
                     let action = UIAlertAction(title: "OK", style: .Default, handler: { _ in
-                        self.navigationController?.popViewControllerAnimated(true)
+                        self.dismissViewControllerAnimated(true, completion: nil)
                     })
                     alertController.addAction(action)
                     self.presentViewController(alertController, animated: true, completion: nil)
@@ -114,8 +118,13 @@ class LocationViewController: UIViewController {
             api.post(body, handler: {
                 if $0.error == nil {
                     dispatch_async(dispatch_get_main_queue(), {
-                        self.navigationController?.popViewControllerAnimated(true)
-                        MapPin.downloadPins()
+                        let alertController = UIAlertController(title: "Post Successful", message: "Successfully posted your location", preferredStyle: .Alert)
+                        let action = UIAlertAction(title: "OK", style: .Default, handler: { _ in
+                            MapPin.downloadPins()
+                            self.dismissViewControllerAnimated(true, completion: nil)
+                        })
+                        alertController.addAction(action)
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     })
                 } else {
                     dispatch_async(dispatch_get_main_queue(), {
