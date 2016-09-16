@@ -49,11 +49,6 @@ class LoginViewController: UIViewController {
                     })
                 } else {
                     print($0.error!)
-
-                    dispatch_async(dispatch_get_main_queue(), {
-                        let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("Navigation Controller")
-                        self.presentViewController(navigationController!, animated: true, completion: nil)
-                    })
                 }
             })
         }

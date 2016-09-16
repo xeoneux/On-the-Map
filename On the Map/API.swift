@@ -26,9 +26,17 @@ struct API {
         self.domain = domain
     }
 
-    func get(handler: (result: AnyObject?, error: NSError?) -> Void) {
+    func get(data: String?, handler: (result: AnyObject?, error: NSError?) -> Void) {
 
-        let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
+        let url: String
+
+        if domain == .Udacity {
+            url = "https://www.udacity.com/api/users/\(data!)"
+        } else {
+            url = domain.rawValue
+        }
+
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
 
         request.HTTPMethod = "GET"
         Header(request)
@@ -116,8 +124,16 @@ struct API {
                 return
             }
 
+            let subdata: NSData?
+
+            if self.domain == .Udacity {
+                subdata = data?.subdataWithRange(NSMakeRange(5, data!.length - 5))
+            } else {
+                subdata = data
+            }
+
             do {
-                let parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+                let parsedData = try NSJSONSerialization.JSONObjectWithData(subdata!, options: .AllowFragments)
                 handler(result: parsedData, error: nil)
             } catch {
                 handler(result: nil, error: Error("Cannot parse JSON data", domain: "POST"))

@@ -34,7 +34,7 @@ struct MapPin {
 
     static func downloadPins() {
         let api = API(domain: .Parse)
-        api.get({
+        api.get(nil, handler: {
             if $0.result != nil {
                 let result = $0.result as! [String: AnyObject]
                 setPins(try! Parser.parseMapPins(result)!)
