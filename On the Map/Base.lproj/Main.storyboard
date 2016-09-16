@@ -21,23 +21,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="f2j-cW-17u">
-                                <rect key="frame" x="20" y="20" width="560" height="580"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pBX-BF-Spj">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="193"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="193"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vdy-L7-pxP">
-                                        <rect key="frame" x="0.0" y="193" width="560" height="194"/>
+                                        <rect key="frame" x="0.0" y="193" width="600" height="194"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-sT-BWU">
-                                        <rect key="frame" x="0.0" y="387" width="560" height="193"/>
-                                        <state key="normal" title="Button"/>
+                                        <rect key="frame" x="0.0" y="387" width="600" height="193"/>
+                                        <state key="normal" title="Find on the Map"/>
                                         <connections>
                                             <action selector="findOnTheMap:" destination="7h8-V3-Jit" eventType="touchUpInside" id="t6R-jw-MEs"/>
                                         </connections>
@@ -48,8 +48,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="f2j-cW-17u" firstAttribute="top" secondItem="YNF-40-a8V" secondAttribute="bottom" id="PvI-bo-DHS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="f2j-cW-17u" secondAttribute="trailing" id="WWk-xZ-QkU"/>
-                            <constraint firstItem="f2j-cW-17u" firstAttribute="leading" secondItem="leu-eA-e4B" secondAttribute="leadingMargin" id="eIy-DZ-u0E"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="f2j-cW-17u" secondAttribute="trailing" constant="-20" id="WWk-xZ-QkU"/>
+                            <constraint firstItem="f2j-cW-17u" firstAttribute="leading" secondItem="leu-eA-e4B" secondAttribute="leadingMargin" constant="-20" id="eIy-DZ-u0E"/>
                             <constraint firstItem="GP9-m4-KUS" firstAttribute="top" secondItem="f2j-cW-17u" secondAttribute="bottom" id="uWA-ZI-UxD"/>
                         </constraints>
                     </view>

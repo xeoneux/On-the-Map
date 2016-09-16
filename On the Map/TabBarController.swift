@@ -29,6 +29,6 @@ class TabBarController: UITabBarController {
 
     @IBAction func pinOnTheMap(sender: AnyObject) {
         let locationViewController = storyboard?.instantiateViewControllerWithIdentifier("Location Controller") as! LocationViewController
-        presentViewController(locationViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(locationViewController, animated: true)
     }
 }

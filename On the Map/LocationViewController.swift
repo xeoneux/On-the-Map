@@ -15,7 +15,9 @@ class LocationViewController: UIViewController {
 
     override func viewDidLoad() {
         textView.text = "Where are you\nStudying\nToday?"
+        textView.textAlignment = .Center
 
+        textField.textColor = UIColor.whiteColor()
         textField.backgroundColor = UIColor(red: 2/255, green: 179/255, blue: 228/255, alpha: 1)
     }
 
