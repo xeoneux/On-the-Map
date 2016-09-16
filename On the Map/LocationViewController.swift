@@ -64,21 +64,30 @@ class LocationViewController: UIViewController {
 
             let search = MKLocalSearch(request: request)
             search.startWithCompletionHandler {
-                guard let response = $0.0 else {
-                    return
+                if $0.1 == nil {
+                    guard let response = $0.0 else {
+                        return
+                    }
+
+                    let coordinate = response.mapItems.first?.placemark.coordinate
+
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = coordinate!
+                    mapView.addAnnotation(annotation)
+
+                    let viewRegion = MKCoordinateRegionMakeWithDistance(coordinate!, 5000, 5000)
+                    let adjustedRedion = mapView.regionThatFits(viewRegion)
+                    mapView.setRegion(adjustedRedion, animated: true)
+                    
+                    self.coordinate = coordinate
+                } else {
+                    let alertController = UIAlertController(title: "Location Error", message: "No such location found", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Default, handler: { _ in
+                        self.navigationController?.popViewControllerAnimated(true)
+                    })
+                    alertController.addAction(action)
+                    self.presentViewController(alertController, animated: true, completion: nil)
                 }
-
-                let coordinate = response.mapItems.first?.placemark.coordinate
-
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinate!
-                mapView.addAnnotation(annotation)
-
-                let viewRegion = MKCoordinateRegionMakeWithDistance(coordinate!, 5000, 5000)
-                let adjustedRedion = mapView.regionThatFits(viewRegion)
-                mapView.setRegion(adjustedRedion, animated: true)
-
-                self.coordinate = coordinate
             }
         }
     }
