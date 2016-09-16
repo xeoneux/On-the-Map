@@ -15,6 +15,12 @@ class TabBarController: UITabBarController {
     @IBOutlet weak var pinButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadDataError), name:"ReloadDataError", object: nil)
+    }
+
     override func viewDidLoad() {
         MapPin.downloadPins()
 
@@ -33,6 +39,12 @@ class TabBarController: UITabBarController {
                 appDelegate.lastName = names.1
             }
         })
+    }
+
+    func reloadDataError() {
+        let alertController = UIAlertController(title: "Download Error", message: "Could not download the data", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
     @IBAction func logout(sender: AnyObject) {

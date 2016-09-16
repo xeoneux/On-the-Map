@@ -39,6 +39,8 @@ struct MapPin {
                 let result = $0.result as! [String: AnyObject]
                 setPins(try! Parser.parseMapPins(result)!)
                 NSNotificationCenter.defaultCenter().postNotificationName("ReloadData", object: nil)
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName("ReloadDataError", object: nil)
             }
         })
     }
