@@ -41,12 +41,20 @@ class LoginViewController: UIViewController {
             let api = API(domain: .Udacity)
             api.post(credentials, handler: {
                 if let result = $0.result {
-                    print(result)
+                    let info = try! Parser.parseSession(result)
 
-                    dispatch_async(dispatch_get_main_queue(), {
-                        let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("Navigation Controller")
-                        self.presentViewController(navigationController!, animated: true, completion: nil)
-                    })
+                    if info.0 {
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.uniqueKey = info.1
+
+                        dispatch_async(dispatch_get_main_queue(), {
+                            let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("Navigation Controller")
+                            self.presentViewController(navigationController!, animated: true, completion: nil)
+                        })
+                    } else {
+                        print(info.1)
+                    }
+
                 } else {
                     print($0.error!)
                 }

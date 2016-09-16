@@ -13,7 +13,7 @@ class Parser {
 
         guard let pins = json["results"] as? [[String: AnyObject]] else {
             print("results")
-            throw Error("Parse error: results", domain: "JSON")
+            throw Error("Parse error: results", domain: "MapPins")
         }
 
         var mapPins = [MapPin]()
@@ -90,5 +90,23 @@ class Parser {
         }
 
         return mapPins
+    }
+
+    static func parseSession(json: AnyObject) throws -> (Bool, String) {
+        let data = json as! [String: AnyObject]
+
+        guard let account = data["account"] as? [String: AnyObject] else {
+            throw Error("Parse error: account", domain: "Session")
+        }
+
+        guard let registered = account["registered"] else {
+            throw Error("Parse error: registered", domain: "Session")
+        }
+
+        guard let key = account["key"] else {
+            throw Error("Parse error: key", domain: "Session")
+        }
+
+        return (registered as! Bool, key as! String)
     }
 }

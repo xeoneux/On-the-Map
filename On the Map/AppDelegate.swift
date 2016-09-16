@@ -11,6 +11,10 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var uniqueKey = ""
+    var firstName = ""
+    var lastName = ""
+
     var window: UIWindow?
     var mapPins = [MapPin]()
 

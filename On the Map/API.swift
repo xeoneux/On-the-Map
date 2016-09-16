@@ -10,7 +10,7 @@ import Foundation
 
 enum Domain: String {
     case Parse = "https://parse.udacity.com/parse/classes/StudentLocation"
-    case Udacity = "https://udacity.com/api/session"
+    case Udacity = "https://www.udacity.com/api/session"
 }
 
 func Error(error: String, domain: String) -> NSError {
@@ -110,17 +110,17 @@ struct API {
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
 
             guard error == nil else {
-                handler(result: nil, error: Error("Data task error", domain: "POST"))
+                handler(result: nil, error: Error("Data task error", domain: "API"))
                 return
             }
 
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                handler(result: nil, error: Error("Response status code not 2xx", domain: "POST"))
+                handler(result: nil, error: Error("Response status code not 2xx", domain: "API"))
                 return
             }
 
             guard data != nil else {
-                handler(result: nil, error: Error("No data recieved from the server", domain: "POST"))
+                handler(result: nil, error: Error("No data recieved from the server", domain: "API"))
                 return
             }
 
@@ -136,7 +136,7 @@ struct API {
                 let parsedData = try NSJSONSerialization.JSONObjectWithData(subdata!, options: .AllowFragments)
                 handler(result: parsedData, error: nil)
             } catch {
-                handler(result: nil, error: Error("Cannot parse JSON data", domain: "POST"))
+                handler(result: nil, error: Error("Cannot parse JSON data", domain: "API"))
                 return
             }
             
