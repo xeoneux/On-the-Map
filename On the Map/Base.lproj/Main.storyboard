@@ -11,7 +11,7 @@
         <!--Location View Controller-->
         <scene sceneID="4vq-TF-QHB">
             <objects>
-                <viewController id="7h8-V3-Jit" customClass="LocationViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Location Controller" id="7h8-V3-Jit" customClass="LocationViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YNF-40-a8V"/>
                         <viewControllerLayoutGuide type="bottom" id="GP9-m4-KUS"/>
@@ -170,7 +170,11 @@
                                     <action selector="refresh:" destination="5jI-A9-Mqd" id="Q23-6X-HFU"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="Pin" id="sjc-0F-gG3"/>
+                            <barButtonItem image="Pin" id="sjc-0F-gG3">
+                                <connections>
+                                    <action selector="pinOnTheMap:" destination="5jI-A9-Mqd" id="a9k-5a-hpk"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="E09-7I-51b">
