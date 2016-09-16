@@ -38,7 +38,8 @@ class LoginViewController: UIViewController {
             let password = passwordField.text
             let credentials = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
 
-            API.post(.Udacity, body: credentials, handler: {
+            let api = API(domain: .Udacity)
+            api.post(credentials, handler: {
                 if let result = $0.result {
                     print(result)
 

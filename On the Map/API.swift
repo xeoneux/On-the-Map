@@ -18,66 +18,30 @@ func Error(error: String, domain: String) -> NSError {
     return NSError(domain: domain, code: 0, userInfo: userInfo)
 }
 
-func Header(request: NSMutableURLRequest, domain: Domain) {
-    switch domain {
-    case .Parse:
-        request.addValue(Constants.Parse.ApplicationId, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(Constants.Parse.restApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
-    case .Udacity:
-        break
-    }
-}
+struct API {
 
-func Task(request: NSMutableURLRequest, handler: (result: AnyObject?, error: NSError?) -> Void) {
-    let session = NSURLSession.sharedSession()
-    let task = session.dataTaskWithRequest(request) { (data, response, error) in
+    let domain: Domain
 
-        guard error == nil else {
-            handler(result: nil, error: Error("Data task error", domain: "POST"))
-            return
-        }
-
-        guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-            handler(result: nil, error: Error("Response status code not 2xx", domain: "POST"))
-            return
-        }
-
-        guard data != nil else {
-            handler(result: nil, error: Error("No data recieved from the server", domain: "POST"))
-            return
-        }
-
-        do {
-            let parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-            handler(result: parsedData, error: nil)
-        } catch {
-            handler(result: nil, error: Error("Cannot parse JSON data", domain: "POST"))
-            return
-        }
-
+    init(domain: Domain) {
+        self.domain = domain
     }
 
-    task.resume()
-}
-
-class API {
-
-    static func get(domain: Domain, handler: (result: AnyObject?, error: NSError?) -> Void) {
+    func get(handler: (result: AnyObject?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
         request.HTTPMethod = "GET"
-        Header(request, domain: domain)
+        Header(request)
 
         Task(request, handler: handler)
     }
 
-    static func post(domain: Domain, body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
+    func post(body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
         request.HTTPMethod = "POST"
-        Header(request, domain: domain)
+        Header(request)
 
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -86,12 +50,12 @@ class API {
         Task(request, handler: handler)
     }
 
-    static func put(domain: Domain, objectId: String, body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
+    func put(objectId: String, body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue + objectId)!)
 
         request.HTTPMethod = "PUT"
-        Header(request, domain: domain)
+        Header(request)
 
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -100,7 +64,7 @@ class API {
         Task(request, handler: handler)
     }
 
-    static func delete(domain: Domain, body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
+    func delete(body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
@@ -118,8 +82,50 @@ class API {
         request.setValue(xsrfCookie?.value, forHTTPHeaderField: "X-XSRF-TOKEN")
 
         request.HTTPMethod = "DELETE"
-        Header(request, domain: domain)
+        Header(request)
 
         Task(request, handler: handler)
+    }
+
+    private func Header(request: NSMutableURLRequest) {
+        switch domain {
+        case .Parse:
+            request.addValue(Constants.Parse.ApplicationId, forHTTPHeaderField: "X-Parse-Application-Id")
+            request.addValue(Constants.Parse.restApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        case .Udacity:
+            break
+        }
+    }
+
+    private func Task(request: NSMutableURLRequest, handler: (result: AnyObject?, error: NSError?) -> Void) {
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+
+            guard error == nil else {
+                handler(result: nil, error: Error("Data task error", domain: "POST"))
+                return
+            }
+
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                handler(result: nil, error: Error("Response status code not 2xx", domain: "POST"))
+                return
+            }
+
+            guard data != nil else {
+                handler(result: nil, error: Error("No data recieved from the server", domain: "POST"))
+                return
+            }
+
+            do {
+                let parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+                handler(result: parsedData, error: nil)
+            } catch {
+                handler(result: nil, error: Error("Cannot parse JSON data", domain: "POST"))
+                return
+            }
+            
+        }
+        
+        task.resume()
     }
 }
