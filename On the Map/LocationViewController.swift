@@ -22,6 +22,10 @@ class LocationViewController: UIViewController {
 
     @IBOutlet weak var stackView: UIStackView!
 
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         textView.text = "Where are you\nStudying\nToday?"
         textView.textAlignment = .Center
