@@ -6,8 +6,8 @@
 //  Copyright © 2016 Aayush Kapoor. All rights reserved.
 //
 
-import UIKit
 import MapKit
+import UIKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
 
