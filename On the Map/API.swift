@@ -33,7 +33,7 @@ struct API {
         if domain == .Udacity {
             url = "https://www.udacity.com/api/users/\(data!)"
         } else {
-            url = domain.rawValue
+            url = domain.rawValue + "?limit=100&order=-updatedAt".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         }
 
         let request = NSMutableURLRequest(URL: NSURL(string: url)!)
