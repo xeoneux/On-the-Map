@@ -93,8 +93,8 @@ class LocationViewController: UIViewController {
             let firstName = appDelegate.firstName
             let lastName = appDelegate.lastName
 
-            let mapString = self.mapString
-            let mediaUrl = textField.text
+            let mapString = self.mapString!
+            let mediaUrl = textField.text!
 
             let latitude = Double(self.coordinate!.latitude)
             let longitude = Double(self.coordinate!.longitude)
@@ -105,9 +105,11 @@ class LocationViewController: UIViewController {
             api.post(body, handler: {
                 if $0.error == nil {
                     dispatch_async(dispatch_get_main_queue(), {
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.navigationController?.popViewControllerAnimated(true)
                         MapPin.downloadPins()
                     })
+                } else {
+                    print($0.error!)
                 }
             })
         }
