@@ -72,7 +72,7 @@ struct API {
         Task(request, handler: handler)
     }
 
-    func delete(body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
+    func delete(handler: (result: AnyObject?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 

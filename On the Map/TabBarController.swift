@@ -36,7 +36,16 @@ class TabBarController: UITabBarController {
     }
 
     @IBAction func logout(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+        let api = API(domain: .Udacity)
+        api.delete({
+            if $0.error == nil {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+            } else {
+                print($0.error!)
+            }
+        })
     }
 
     @IBAction func refresh(sender: AnyObject) {
