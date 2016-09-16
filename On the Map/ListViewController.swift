@@ -31,7 +31,10 @@ extension ListViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        return
+        let pin = MapPin.getPins()[indexPath.row]
+        let app = UIApplication.sharedApplication()
+
+        app.openURL(NSURL(string: pin.mediaUrl)!)
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
