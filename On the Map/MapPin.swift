@@ -8,6 +8,8 @@
 
 import UIKit
 
+var MapPins = [MapPin]()
+
 struct MapPin {
 
     let firstName: String
@@ -23,13 +25,11 @@ struct MapPin {
     let uniqueKey: String
 
     static func getPins() -> [MapPin] {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        return appDelegate.mapPins
+        return MapPins
     }
 
     static func setPins(mapPins: [MapPin]) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.mapPins = mapPins
+        MapPins = mapPins
     }
 
     static func downloadPins() {
