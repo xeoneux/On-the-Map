@@ -10,7 +10,7 @@ import Foundation
 
 enum Domain: String {
     case Parse = "https://parse.udacity.com/parse/classes/StudentLocation"
-    case Udacity = "https://www.udacity.com/api/"
+    case Udacity = "https://www.udacity.com/api/session"
 }
 
 func Error(error: String, domain: String) -> NSError {
@@ -121,5 +121,14 @@ class API {
         Header(request, domain: domain)
 
         Task(request, handler: handler)
+    }
+
+    static func bodyMaker(domain: Domain, email: String, password: String) -> String {
+        switch domain {
+        case .Parse:
+            return ""
+        case .Udacity:
+            return "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
+        }
     }
 }
