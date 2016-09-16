@@ -35,7 +35,8 @@ struct MapPin {
     static func downloadPins() {
         API.get(.Parse, handler: {
             if $0.result != nil {
-                setPins(try! Parser.parseMapPins($0.result!)!)
+                let result = $0.result as! [String: AnyObject]
+                setPins(try! Parser.parseMapPins(result)!)
                 NSNotificationCenter.defaultCenter().postNotificationName("ReloadData", object: nil)
             }
         })

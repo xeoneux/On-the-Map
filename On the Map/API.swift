@@ -10,7 +10,7 @@ import Foundation
 
 enum Domain: String {
     case Parse = "https://parse.udacity.com/parse/classes/StudentLocation"
-    case Udacity = "https://www.udacity.com/api/session"
+    case Udacity = "https://udacity.com/api/session"
 }
 
 func Error(error: String, domain: String) -> NSError {
@@ -28,7 +28,7 @@ func Header(request: NSMutableURLRequest, domain: Domain) {
     }
 }
 
-func Task(request: NSMutableURLRequest, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
+func Task(request: NSMutableURLRequest, handler: (result: AnyObject?, error: NSError?) -> Void) {
     let session = NSURLSession.sharedSession()
     let task = session.dataTaskWithRequest(request) { (data, response, error) in
 
@@ -48,7 +48,7 @@ func Task(request: NSMutableURLRequest, handler: (result: [String: AnyObject]?, 
         }
 
         do {
-            let parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! [String: AnyObject]
+            let parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
             handler(result: parsedData, error: nil)
         } catch {
             handler(result: nil, error: Error("Cannot parse JSON data", domain: "POST"))
@@ -62,7 +62,7 @@ func Task(request: NSMutableURLRequest, handler: (result: [String: AnyObject]?, 
 
 class API {
 
-    static func get(domain: Domain, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
+    static func get(domain: Domain, handler: (result: AnyObject?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
@@ -72,7 +72,7 @@ class API {
         Task(request, handler: handler)
     }
 
-    static func post(domain: Domain, body: String, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
+    static func post(domain: Domain, body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 
@@ -86,7 +86,7 @@ class API {
         Task(request, handler: handler)
     }
 
-    static func put(domain: Domain, objectId: String, body: String, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
+    static func put(domain: Domain, objectId: String, body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue + objectId)!)
 
@@ -100,7 +100,7 @@ class API {
         Task(request, handler: handler)
     }
 
-    static func delete(domain: Domain, body: String, handler: (result: [String: AnyObject]?, error: NSError?) -> Void) {
+    static func delete(domain: Domain, body: String, handler: (result: AnyObject?, error: NSError?) -> Void) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: domain.rawValue)!)
 

@@ -47,7 +47,12 @@ class LoginViewController: UIViewController {
                         self.presentViewController(navigationController!, animated: true, completion: nil)
                     })
                 } else {
-                    print($0.error)
+                    print($0.error!)
+
+                    dispatch_async(dispatch_get_main_queue(), {
+                        let navigationController = self.storyboard?.instantiateViewControllerWithIdentifier("Navigation Controller")
+                        self.presentViewController(navigationController!, animated: true, completion: nil)
+                    })
                 }
             })
         }
