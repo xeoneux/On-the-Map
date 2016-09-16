@@ -13,9 +13,9 @@ enum Domain: String {
     case Udacity = "https://www.udacity.com/api/session"
 }
 
-func Error(error: String, domain: String) -> NSError {
+func Error(code: Int, error: String, domain: String) -> NSError {
     let userInfo = [NSLocalizedDescriptionKey: error]
-    return NSError(domain: domain, code: 0, userInfo: userInfo)
+    return NSError(domain: domain, code: code, userInfo: userInfo)
 }
 
 struct API {
@@ -83,7 +83,7 @@ struct API {
         }.first
 
         guard xsrfCookie != nil else {
-            handler(result: nil, error: Error("No cookie found", domain: "API"))
+            handler(result: nil, error: Error(0, error: "No cookie found", domain: "API"))
             return
         }
 
@@ -110,17 +110,22 @@ struct API {
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
 
             guard error == nil else {
-                handler(result: nil, error: Error("Data task error", domain: "API"))
+                handler(result: nil, error: Error(0, error: "Data task error", domain: "API"))
+                return
+            }
+
+            guard let invalidCredentials = (response as? NSHTTPURLResponse)?.statusCode where invalidCredentials != 403 else {
+                handler(result: nil, error: Error(403, error: "Response status code 403", domain: "API"))
                 return
             }
 
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                handler(result: nil, error: Error("Response status code not 2xx", domain: "API"))
+                handler(result: nil, error: Error(200, error: "Response status code not 2xx", domain: "API"))
                 return
             }
 
             guard data != nil else {
-                handler(result: nil, error: Error("No data recieved from the server", domain: "API"))
+                handler(result: nil, error: Error(204, error: "No data recieved from the server", domain: "API"))
                 return
             }
 
@@ -136,7 +141,7 @@ struct API {
                 let parsedData = try NSJSONSerialization.JSONObjectWithData(subdata!, options: .AllowFragments)
                 handler(result: parsedData, error: nil)
             } catch {
-                handler(result: nil, error: Error("Cannot parse JSON data", domain: "API"))
+                handler(result: nil, error: Error(1, error: "Cannot parse JSON data", domain: "API"))
                 return
             }
             

@@ -56,7 +56,19 @@ class LoginViewController: UIViewController {
                     }
 
                 } else {
-                    print($0.error!)
+                    if $0.error!.code == 403 {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            let alertController = UIAlertController(title: "Invalid Credentials", message: "The entered email or password is incorrect", preferredStyle: .Alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        })
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            let alertController = UIAlertController(title: "Failure to Connect", message: "Could not connect to the server", preferredStyle: .Alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        })
+                    }
                 }
             })
         }

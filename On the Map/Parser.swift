@@ -12,7 +12,7 @@ class Parser {
     static func parseMapPins(json: [String: AnyObject]) throws -> [MapPin]? {
 
         guard let pins = json["results"] as? [[String: AnyObject]] else {
-            throw Error("Parse error: results", domain: "MapPins")
+            throw Error(1, error: "Parse error: results", domain: "MapPins")
         }
 
         var mapPins = [MapPin]()
@@ -95,15 +95,15 @@ class Parser {
         let data = json as! [String: AnyObject]
 
         guard let account = data["account"] as? [String: AnyObject] else {
-            throw Error("Parse error: account", domain: "Session")
+            throw Error(1, error: "Parse error: account", domain: "Session")
         }
 
         guard let registered = account["registered"] else {
-            throw Error("Parse error: registered", domain: "Session")
+            throw Error(1, error: "Parse error: registered", domain: "Session")
         }
 
         guard let key = account["key"] else {
-            throw Error("Parse error: key", domain: "Session")
+            throw Error(1, error: "Parse error: key", domain: "Session")
         }
 
         return (registered as! Bool, key as! String)
@@ -113,15 +113,15 @@ class Parser {
         let data = json as! [String: AnyObject]
 
         guard let user = data["user"] as? [String: AnyObject] else {
-            throw Error("Parse error: user", domain: "UserInfo")
+            throw Error(1, error: "Parse error: user", domain: "UserInfo")
         }
 
         guard let firstName = user["first_name"] else {
-            throw Error("Parse error: first_name", domain: "UserInfo")
+            throw Error(1, error: "Parse error: first_name", domain: "UserInfo")
         }
 
         guard let lastName = user["last_name"] else {
-            throw Error("Parse error: last_name", domain: "UserInfo")
+            throw Error(1, error: "Parse error: last_name", domain: "UserInfo")
         }
 
         return (firstName as! String, lastName as! String)
