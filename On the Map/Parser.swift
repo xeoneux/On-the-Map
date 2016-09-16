@@ -64,7 +64,7 @@ class Parser {
                 mapString = ""
             }
 
-            if let _mediaUrl = pin["mediaUrl"] as? String {
+            if let _mediaUrl = pin["mediaURL"] as? String {
                 mediaUrl = _mediaUrl
             } else {
                 mediaUrl = ""
