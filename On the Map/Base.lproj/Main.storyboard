@@ -8,10 +8,10 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Location View Controller-->
         <scene sceneID="4vq-TF-QHB">
             <objects>
-                <viewController id="7h8-V3-Jit" sceneMemberID="viewController">
+                <viewController id="7h8-V3-Jit" customClass="LocationViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YNF-40-a8V"/>
                         <viewControllerLayoutGuide type="bottom" id="GP9-m4-KUS"/>
@@ -30,14 +30,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vdy-L7-pxP">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vdy-L7-pxP">
                                         <rect key="frame" x="0.0" y="193" width="560" height="194"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-sT-BWU">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-sT-BWU">
                                         <rect key="frame" x="0.0" y="387" width="560" height="193"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="findOnTheMap:" destination="7h8-V3-Jit" eventType="touchUpInside" id="t6R-jw-MEs"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -50,6 +53,10 @@
                             <constraint firstItem="GP9-m4-KUS" firstAttribute="top" secondItem="f2j-cW-17u" secondAttribute="bottom" id="uWA-ZI-UxD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="Vdy-L7-pxP" id="Han-Xf-m4G"/>
+                        <outlet property="textView" destination="pBX-BF-Spj" id="FYQ-m4-dey"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lGl-Pl-51I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
