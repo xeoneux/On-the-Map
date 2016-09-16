@@ -17,6 +17,22 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         MapPin.downloadPins()
+
+        getNames()
+    }
+
+    func getNames() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let uniqueKey = appDelegate.uniqueKey
+
+        let api = API(domain: .Udacity)
+        api.get(uniqueKey, handler: {
+            if let result = $0.result {
+                let names = try! Parser.parseUserInfo(result)
+                appDelegate.firstName = names.0
+                appDelegate.lastName = names.1
+            }
+        })
     }
 
     @IBAction func logout(sender: AnyObject) {

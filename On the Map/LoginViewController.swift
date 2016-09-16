@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
         if emailField.text?.characters.count != 0 && passwordField.text?.characters.count != 0 {
             let email = emailField.text
             let password = passwordField.text
-            let credentials = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
+            let credentials = "{\"udacity\": {\"username\": \"\(email!)\", \"password\": \"\(password!)\"}}"
 
             let api = API(domain: .Udacity)
             api.post(credentials, handler: {
