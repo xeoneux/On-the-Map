@@ -71,6 +71,10 @@ class LoginViewController: UIViewController {
                     }
                 }
             })
+        } else {
+            let alertController = UIAlertController(title: "Blank Fields", message: "Please enter email address and password", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
 
