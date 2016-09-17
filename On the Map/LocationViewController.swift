@@ -71,13 +71,22 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
             submitButton.setTitle("Submit", forState: .Normal)
             stackView.addArrangedSubview(submitButton)
 
-            // Search for location
+            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            activityIndicator.center = view.center
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+
+            // Create search request
             let request = MKLocalSearchRequest()
             request.region = mapView.region
             request.naturalLanguageQuery = searchText
 
+            // Start search for location
             let search = MKLocalSearch(request: request)
             search.startWithCompletionHandler {
+
+                activityIndicator.stopAnimating()
+
                 if $0.1 == nil {
                     guard let response = $0.0 else {
                         return
