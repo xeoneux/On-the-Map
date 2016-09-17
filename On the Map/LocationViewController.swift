@@ -9,7 +9,7 @@
 import MapKit
 import UIKit
 
-class LocationViewController: UIViewController {
+class LocationViewController: UIViewController, UITextFieldDelegate {
 
     var mapString: String?
     var coordinate: CLLocationCoordinate2D?
@@ -30,10 +30,16 @@ class LocationViewController: UIViewController {
         textView.text = "Where are you\nStudying\nToday?"
         textView.textAlignment = .Center
 
+        textField.delegate = self
         textField.textColor = UIColor.whiteColor()
         textField.backgroundColor = UIColor(red: 2/255, green: 179/255, blue: 228/255, alpha: 1)
 
         submitButton.addTarget(self, action: #selector(submit), forControlEvents: .TouchUpInside)
+    }
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
     @IBAction func cancel(sender: AnyObject) {
