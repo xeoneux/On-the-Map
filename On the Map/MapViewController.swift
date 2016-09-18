@@ -25,6 +25,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
 
+        mapView.delegate = self
+
         mapView.removeAnnotations(mapView.annotations)
 
         let annotations: [MKPointAnnotation] = MapPin.getPins().map {
